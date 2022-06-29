@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/fun-flute-sheets/static/css/main.0703e904.css",
-    "main.js": "/fun-flute-sheets/static/js/main.f3dd22c6.js",
+    "main.js": "/fun-flute-sheets/static/js/main.8f05e9e0.js",
     "static/media/CormorantGaramond-Regular.ttf": "/fun-flute-sheets/static/media/CormorantGaramond-Regular.274cef1344d2d06fb1be.ttf",
     "index.html": "/fun-flute-sheets/index.html",
     "main.0703e904.css.map": "/fun-flute-sheets/static/css/main.0703e904.css.map",
-    "main.f3dd22c6.js.map": "/fun-flute-sheets/static/js/main.f3dd22c6.js.map"
+    "main.8f05e9e0.js.map": "/fun-flute-sheets/static/js/main.8f05e9e0.js.map"
   },
   "entrypoints": [
     "static/css/main.0703e904.css",
-    "static/js/main.f3dd22c6.js"
+    "static/js/main.8f05e9e0.js"
   ]
 }
