@@ -1,7 +1,9 @@
 import { storageService } from './storage.service.js';
-import { utilService } from './util.service.js';
+import { httpService } from './httpService';
 
 const STORAGE_KEY = 'melodyDB';
+const BASE_URL = 'tab';
+
 // const STORAGE_FAVORITE_KEY = 'favoriteDB';
 
 export const melodyService = {
@@ -12,11 +14,30 @@ export const melodyService = {
   getById,
 };
 
+// async function query(filterBy) {
+//   console.log('filterBy:', filterBy);
+
+//   try {
+//     return httpService.get(BASE_URL, filterBy);
+//   } catch (err) {
+//     console.log('cant get todos from server', err);
+//     throw err;
+//   }
+// }
+
 async function query({ genre, text } = {}) {
   let melodies = _loadMelodiesFromStorage();
-
-  console.log('genre:', genre);
-  console.log('text:', text);
+  let melody = {
+    id: 'jpAuJb',
+    name: 'Scarborough Fair',
+    image: 'taeeoz3vbsv4mnxdd7i8',
+    genre: 'irish',
+  };
+  if (!melodies || melodies.length < 1) {
+    const updatedMelodies = [...(melodies = []), melody];
+    _saveMelodiesToStorage(updatedMelodies);
+    return updatedMelodies;
+  }
 
   try {
     let list = melodies;

@@ -17,6 +17,9 @@ export function melodyReducer(state = initialState, action) {
     case 'SET_FILTER':
       newState = { ...state, filterBy: action.filterBy };
       break;
+
+    default:
+      return newState;
   }
   return newState;
 }

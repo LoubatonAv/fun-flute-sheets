@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { melodyService, getById } from '../service/melody.service.js';
+import { melodyService } from '../service/melody.service.js';
 
 export const MelodyDetails = () => {
   const { melodyId } = useParams();
@@ -17,9 +17,7 @@ export const MelodyDetails = () => {
     getById(melodyId).then((melody) => {
       setMelody(melody);
     });
-  }, []);
-
-  console.log('melody:', melody);
+  }, [melodyId]);
 
   return <div>{/* <div>{melody.im}</div> */}</div>;
 };

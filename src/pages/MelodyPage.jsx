@@ -6,11 +6,15 @@ import Axios from 'axios';
 import Filters from '../cmps/Filters';
 import { utilService } from '../service/util.service';
 import { melodyService } from '../service/melody.service.js';
+import { Pagination } from '../cmps/Pagination';
 
 export const MelodyPage = () => {
   const CLOUD_NAME = 'dbgfhkg2d';
   const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
   const inputRef = useRef(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tabsPerPage] = useState(9);
   const [itemUploaded, setItemUploaded] = useState(false);
   const [uploadMode, setUploadMode] = useState(false);
   const [modalClosed, setModalClosed] = useState(true);
@@ -21,6 +25,7 @@ export const MelodyPage = () => {
     id: utilService.makeId(),
     genre: null,
   });
+
   const melodies = useSelector((state) => state?.melodyModule?.melodies);
   const dispatch = useDispatch();
   const genres = melodyService.getGenres();
@@ -30,12 +35,20 @@ export const MelodyPage = () => {
   }, [itemUploaded, dispatch]);
 
   const uploadImage = () => {
+    if (!imageSelected) {
+      alert('Please select a file!');
+    }
+
+    const found = melodies.some((el) => el.name.toLowerCase() === melody.name.toLowerCase());
+    if (found) {
+      alert('Tab already exists');
+      return;
+    }
     const formData = new FormData();
     formData.append('file', imageSelected[0]);
     formData.append('upload_preset', 'bhbkalyp');
 
     Axios.post(UPLOAD_URL, formData).then((response) => {
-      console.log('response:', response);
       setItemUploaded(true);
       setMelody({ ...melody, image: response.data.public_id });
     });
@@ -46,19 +59,23 @@ export const MelodyPage = () => {
   };
 
   const onAddMelody = () => {
-    if (!imageSelected) {
-      alert('Please select a file!');
-    }
     if (!melody.image) return;
     dispatch(addMelody(melody));
     setMelody({
       name: '',
       image: null,
     });
+
     setImageSelected(null);
     setItemUploaded(false);
     inputRef.current.value = null;
   };
+
+  const indexOfLastTab = currentPage * tabsPerPage;
+  const indexOfFirstTab = indexOfLastTab - tabsPerPage;
+  const currentTabs = melodies.slice(indexOfFirstTab, indexOfLastTab);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -75,6 +92,7 @@ export const MelodyPage = () => {
         {uploadMode && (
           <div className='flex flex-row w-full pb-5 h-max-content'>
             <input
+              required
               className='block appearance-none border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
               type='text'
               placeholder='Choose name..'
@@ -82,6 +100,7 @@ export const MelodyPage = () => {
               onChange={(e) => setMelody({ ...melody, name: e.target.value })}
             />
             <select
+              required
               className='bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/6 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
               value={melody.genre}
               onChange={(e) => setMelody({ ...melody, genre: e.target.value })}>
@@ -125,7 +144,8 @@ export const MelodyPage = () => {
           </div>
         )}
 
-        <MelodiesList melodies={melodies} closeModal={closeModal} />
+        <MelodiesList melodies={currentTabs} closeModal={closeModal} />
+        <Pagination tabsPerPage={tabsPerPage} totalTabs={melodies.length} paginate={paginate} />
       </div>
     </>
   );
