@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.d6ec7dcd.css",
-    "main.js": "/static/js/main.2787ec62.js",
-    "static/media/CormorantGaramond-Regular.ttf": "/static/media/CormorantGaramond-Regular.274cef1344d2d06fb1be.ttf",
-    "index.html": "/index.html",
-    "main.d6ec7dcd.css.map": "/static/css/main.d6ec7dcd.css.map",
-    "main.2787ec62.js.map": "/static/js/main.2787ec62.js.map"
+    "main.css": "/fun-flute-sheets/static/css/main.0703e904.css",
+    "main.js": "/fun-flute-sheets/static/js/main.2f61689e.js",
+    "static/media/CormorantGaramond-Regular.ttf": "/fun-flute-sheets/static/media/CormorantGaramond-Regular.274cef1344d2d06fb1be.ttf",
+    "index.html": "/fun-flute-sheets/index.html",
+    "main.0703e904.css.map": "/fun-flute-sheets/static/css/main.0703e904.css.map",
+    "main.2f61689e.js.map": "/fun-flute-sheets/static/js/main.2f61689e.js.map"
   },
   "entrypoints": [
-    "static/css/main.d6ec7dcd.css",
-    "static/js/main.2787ec62.js"
+    "static/css/main.0703e904.css",
+    "static/js/main.2f61689e.js"
   ]
 }
