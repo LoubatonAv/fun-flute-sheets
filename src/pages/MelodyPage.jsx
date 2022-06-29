@@ -96,7 +96,9 @@ export const MelodyPage = () => {
       <Filters />
       <div
         className={
-          modalClosed ? `min-h-screen flex flex-col bg-gray-200 px-40` : `min-h-screen flex flex-col bg-black px-40`
+          modalClosed
+            ? `min-h-screen flex flex-col bg-gray-200 px-5 overflow-x-hidden lg:px-40`
+            : `min-h-screen flex flex-col bg-black px-5 overflow-x-hidden lg:px-40`
         }>
         <button
           onClick={() => setUploadMode(!uploadMode)}
@@ -104,7 +106,7 @@ export const MelodyPage = () => {
           Upload a tab
         </button>
         {uploadMode && (
-          <div className='flex flex-row w-full pb-5 h-max-content'>
+          <div className='flex flex-col w-full pb-5 h-max-content lg:flex-row'>
             <input
               required
               className='block appearance-none border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
@@ -115,7 +117,7 @@ export const MelodyPage = () => {
             />
             <select
               required
-              className='bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/6 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              className='lg:w-1/6 w-full bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
               value={melody.genre}
               onChange={(e) => setMelody({ ...melody, genre: e.target.value })}>
               <option value={'none'}>No genre selected</option>

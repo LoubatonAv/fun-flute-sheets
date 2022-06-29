@@ -1,7 +1,7 @@
 {
   "name": "electron-react-demo",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": " https://LoubatonAv.github.io/fun-flute-sheets",
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.0",

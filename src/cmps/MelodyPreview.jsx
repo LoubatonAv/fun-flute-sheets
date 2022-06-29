@@ -26,11 +26,14 @@ export const MelodyPreview = ({ melody, closeModal }) => {
   // </Link>
 
   return (
-    <div className='bg-white relative shadow-2xl'>
-      <div className='text-center text-4xl py-3 font-cormorant'>{melody.name}</div>
-      <button className='absolute -right-0 top-1 h-7 w-7  ' onClick={() => onRemoveMelody(melody)}>
-        <img className='h-max-content ' src={TrashIcon} alt='trash-icon' />
-      </button>
+    <div className='bg-white  shadow-2xl'>
+      <div className='relative'>
+        <div className='text-center text-2xl py-3 font-cormorant lg:text-4xl'>{melody.name}</div>
+        <button className='absolute right-1 top-1 h-5 w-5' onClick={() => onRemoveMelody(melody)}>
+          <img className='h-max-content' src={TrashIcon} alt='trash-icon' />
+        </button>
+      </div>
+
       <div className='aspect-w-3 aspect-h-2' onClick={() => handleCloseModal(modal)}>
         <img src={image} alt='tab-modal' />
         {modal && <Modal image={image} />}
