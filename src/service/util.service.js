@@ -17,9 +17,9 @@ function debounce(func, wait) {
   };
 }
 
-function makeId(length = 6) {
+function makeId(length = 20) {
   var txt = '';
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678!@#$%^&*9';
 
   for (var i = 0; i < length; i++) {
     txt += possible.charAt(Math.floor(Math.random() * possible.length));

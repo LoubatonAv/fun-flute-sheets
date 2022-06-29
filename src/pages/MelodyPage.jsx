@@ -7,6 +7,7 @@ import Filters from '../cmps/Filters';
 import { utilService } from '../service/util.service';
 import { melodyService } from '../service/melody.service.js';
 import { Pagination } from '../cmps/Pagination';
+import { v4 as uuidv4 } from 'uuid';
 
 export const MelodyPage = () => {
   const CLOUD_NAME = 'dbgfhkg2d';
@@ -22,9 +23,11 @@ export const MelodyPage = () => {
   const [melody, setMelody] = useState({
     name: '',
     image: null,
-    id: utilService.makeId(),
-    genre: null,
+    id: uuidv4(),
+    genre: 'none',
   });
+
+  console.log('melody.genre:', melody.genre);
 
   const melodies = useSelector((state) => state?.melodyModule?.melodies);
   const dispatch = useDispatch();
@@ -37,6 +40,17 @@ export const MelodyPage = () => {
   const uploadImage = () => {
     if (!imageSelected) {
       alert('Please select a file!');
+      return;
+    }
+
+    if (melody.genre === 'none') {
+      alert('Please select a genre');
+      return;
+    }
+
+    if (!melody.name) {
+      alert('Please choose a name');
+      return;
     }
 
     const found = melodies.some((el) => el.name.toLowerCase() === melody.name.toLowerCase());
@@ -104,6 +118,7 @@ export const MelodyPage = () => {
               className='bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/6 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
               value={melody.genre}
               onChange={(e) => setMelody({ ...melody, genre: e.target.value })}>
+              <option value={'none'}>No genre selected</option>
               {genres.map((genre) => (
                 <option value={genre.toLowerCase()}>{genre}</option>
               ))}

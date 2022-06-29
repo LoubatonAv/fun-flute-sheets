@@ -20,9 +20,6 @@ function removeFromStorage(entityType, entityId) {
 
 function query(entityType, filterBy, delay = 1) {
   var entities = JSON.parse(localStorage.getItem(entityType)) || [];
-  if (filterBy) {
-    console.log(filterBy);
-  }
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
