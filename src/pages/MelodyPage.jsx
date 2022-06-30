@@ -4,16 +4,15 @@ import { loadMelodies, addMelody } from '../cmps/store/melody.action';
 import { MelodiesList } from '../cmps/MelodiesList';
 import Axios from 'axios';
 import Filters from '../cmps/Filters';
-import { utilService } from '../service/util.service';
 import { melodyService } from '../service/melody.service.js';
 import { Pagination } from '../cmps/Pagination';
-import { v4 as uuidv4 } from 'uuid';
 
 export const MelodyPage = () => {
   const CLOUD_NAME = 'dbgfhkg2d';
   const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
   const inputRef = useRef(null);
 
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [tabsPerPage] = useState(9);
   const [itemUploaded, setItemUploaded] = useState(false);
@@ -23,11 +22,17 @@ export const MelodyPage = () => {
   const [melody, setMelody] = useState({
     name: '',
     image: null,
-    id: uuidv4(),
     genre: 'none',
   });
 
-  console.log('melody.genre:', melody.genre);
+  const getUser = () => {
+    let data = sessionStorage.getItem('loggedinUser');
+    setCurrentUser(JSON.parse(data)?.fullname);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, [currentUser]);
 
   const melodies = useSelector((state) => state?.melodyModule?.melodies);
   const dispatch = useDispatch();
@@ -93,7 +98,7 @@ export const MelodyPage = () => {
 
   return (
     <>
-      <Filters />
+      <Filters currentUser={currentUser} />
       <div
         className={
           modalClosed

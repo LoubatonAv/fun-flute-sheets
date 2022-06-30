@@ -2,11 +2,11 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import { melodyReducer } from './melody.reducer.js';
-// import { favoriteReducer } from './favorite.reducer.js';
+import { userReducer } from './user.reducer.js';
 
 const rootReducer = combineReducers({
   melodyModule: melodyReducer,
-  // favoriteModule: favoriteReducer,
+  userModule: userReducer,
 });
 
 export default createStore(rootReducer, applyMiddleware(thunk));
