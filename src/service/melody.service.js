@@ -15,8 +15,6 @@ export const melodyService = {
 };
 
 async function query(filterBy) {
-  console.log('filterBy:', filterBy);
-
   try {
     return httpService.get(BASE_URL, filterBy);
   } catch (err) {
@@ -78,6 +76,8 @@ function capitalizeName(name) {
 
 async function addMelody(melody) {
   let newMelody = { ...melody, name: capitalizeName(melody.name) };
+  console.log('melody:', newMelody);
+
   try {
     return httpService.post(BASE_URL, newMelody); //destructure the todo object and giving it the name key
   } catch (err) {
@@ -87,8 +87,6 @@ async function addMelody(melody) {
 }
 
 function remove(tabId) {
-  console.log('tabId:', tabId);
-
   // return storageService.removeFromStorage(STORAGE_KEY, todoId);
   try {
     return httpService.delete(`${BASE_URL}/${tabId}`);

@@ -3,7 +3,7 @@ import { LoginSignupModal } from './cmps/LoginSignupModal';
 
 export const routes = [
   {
-    path: '/',
+    path: '/tabs',
     component: Home,
   },
   {

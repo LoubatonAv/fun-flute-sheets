@@ -14,7 +14,7 @@ const Filters = ({ currentUser }) => {
   });
 
   useEffect(() => {
-    dispatch(loadMelodies(filter));
+    dispatch(loadMelodies(filter, currentUser));
   }, [filter, dispatch]);
 
   const goToLogin = () => {
@@ -24,7 +24,7 @@ const Filters = ({ currentUser }) => {
   return (
     <div>
       <div className='flex justify-end bg-white cursor-pointer' onClick={goToLogin}>
-        Welcome {currentUser} !
+        Welcome {currentUser ? currentUser.username : 'Guest'} !
       </div>
       <div className='w-full flex flex-col justify-center h-full sticky top-0 z-50 bg-white lg:flex-row pb-5'>
         <input

@@ -3,7 +3,6 @@ export function login(credentials) {
   return async (dispatch) => {
     try {
       const user = await userService.login(credentials);
-      console.log('credentials:', credentials);
       dispatch({ type: 'SET_USER', user });
     } catch (err) {
       console.log('no user found', err);

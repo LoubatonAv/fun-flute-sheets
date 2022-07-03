@@ -14,11 +14,9 @@ export const userService = {
 };
 
 async function login(credentials) {
-  // console.log('cred in services', credentials);
   try {
     const user = await httpService.post(`auth/login`, credentials);
     _setLoggedinUser(user);
-
     return user;
   } catch (err) {
     console.log('userserivce-front-eror', err);

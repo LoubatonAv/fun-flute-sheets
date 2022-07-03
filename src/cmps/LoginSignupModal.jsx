@@ -27,7 +27,7 @@ export const LoginSignupModal = () => {
     if (!credentials.password || !credentials.username) return;
     dispatch(login(credentials));
     clearState();
-    navigate('/');
+    navigate('/tabs');
   };
 
   const onSignUp = (e) => {
