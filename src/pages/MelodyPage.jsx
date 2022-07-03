@@ -31,8 +31,10 @@ export const MelodyPage = () => {
     let data = sessionStorage.getItem('loggedinUser');
     let loggedUser = JSON.parse(data);
 
-    setCurrentUser(loggedUser);
-    setMelody({ ...melody, user: loggedUser._id });
+    if (data) {
+      setCurrentUser(loggedUser);
+      setMelody({ ...melody, user: loggedUser._id });
+    }
   }, []);
 
   const melodies = useSelector((state) => state?.melodyModule?.melodies);
@@ -100,11 +102,13 @@ export const MelodyPage = () => {
               ? `min-h-screen flex flex-col bg-gray-200 px-5 overflow-x-hidden lg:px-40`
               : `min-h-screen flex flex-col bg-black px-5 overflow-x-hidden lg:px-40`
           }>
-          <button
-            onClick={() => setUploadMode(!uploadMode)}
-            className='text-3xl md:text-4xl font-medium mb-2 max-w-2xl mx-auto py-5'>
-            Upload a tab
-          </button>
+          {currentUser && (
+            <button
+              onClick={() => setUploadMode(!uploadMode)}
+              className='text-3xl md:text-4xl font-medium mb-2 max-w-2xl mx-auto py-5'>
+              Upload a tab
+            </button>
+          )}
           {uploadMode && (
             <div className='flex flex-col w-full pb-5 h-max-content lg:flex-row'>
               <input
@@ -162,7 +166,7 @@ export const MelodyPage = () => {
               </div>
             </div>
           )}
-          <MelodiesList melodies={currentTabs} closeModal={closeModal} />
+          <MelodiesList melodies={currentTabs} closeModal={closeModal} currentUser={currentUser} />
           <Pagination tabsPerPage={tabsPerPage} totalTabs={melodies.length} paginate={paginate} />
         </div>
       </div>

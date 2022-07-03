@@ -4,7 +4,7 @@ import { Modal } from './Modal';
 import { useState } from 'react';
 import TrashIcon from '../assets/Images/trash.png';
 
-export const MelodyPreview = ({ melody, closeModal }) => {
+export const MelodyPreview = ({ melody, closeModal, currentUser }) => {
   const CLOUD_NAME = 'dbgfhkg2d';
   const dispatch = useDispatch();
   const onRemoveMelody = (melody) => {
@@ -27,11 +27,12 @@ export const MelodyPreview = ({ melody, closeModal }) => {
     <div className='bg-white shadow-2xl'>
       <div className='relative'>
         <div className='text-center text-2xl py-3 font-cormorant lg:text-4xl'>{melody.name}</div>
-        <button className='absolute right-1 top-1 h-5 w-5' onClick={() => onRemoveMelody(melody)}>
-          <img className='h-max-content' src={TrashIcon} alt='trash-icon' />
-        </button>
+        {currentUser && (
+          <button className='absolute right-1 top-1 h-5 w-5' onClick={() => onRemoveMelody(melody)}>
+            <img className='h-max-content' src={TrashIcon} alt='trash-icon' />
+          </button>
+        )}
       </div>
-
       <div className='aspect-w-3 aspect-h-2' onClick={() => handleCloseModal(modal)}>
         <img src={image} alt='tab-modal' />
         {modal && <Modal children={<img src={image} alt='tab-modal' />} />}
